@@ -4,48 +4,46 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using KursWebApplication.Models;
+using KursWebApplication.Business_Logic;
 
 namespace KursWebApplication.Controllers
 {
     //[Authorize]
     public class WorkListController : ApiController
     {
+        WorkLogic logic = new WorkLogic();
+
         // GET api/values
         public List<MyDBModels.WorkList> Get()
         {
-            var db = new MyDBModels.DB();
-            return db.workList.ToList();
+            return logic.logicMethodForGetListData();
         }
 
         // GET api/values/
         public MyDBModels.WorkList Get(int id)
         {
-            var db = new MyDBModels.DB();
-            return db.workList.Where(wl => wl.WorkListID == id).FirstOrDefault();
+            if (id != 0)
+            {
+                return logic.logicMethodForGetData(id);
+            }
+            return null;
         }
 
         // POST api/values
-        public void Post(Models.WorkListModel value)
+        public void Post(Models.WorkListModel newWork)
         {
-            var db = new MyDBModels.DB();
-            MyDBModels.WorkList workList = new MyDBModels.WorkList();
-            workList.DriverId = value.DriverId;
-            workList.BusId = value.BusId;
-            workList.SecondNameDispatcher = value.SecondNameDispatcher;
-            workList.StateHealth = value.StateHealth;
-            db.workList.Add(workList);
-            db.SaveChanges();
+            if (newWork != null)
+            {
+                logic.logicMethodForPostData(newWork);
+            }
         }
 
         // DELETE api/values/
         public void Delete(int id)
         {
-            var db = new MyDBModels.DB();
-            MyDBModels.WorkList workList = db.workList.Where(wl => wl.WorkListID == id).FirstOrDefault();
-            if (workList != null)
+            if (id != 0)
             {
-                db.workList.Remove(workList);
-                db.SaveChanges();
+                logic.logicMethodForDeleteDataint(id);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using KursWebApplication.Models;
+﻿using KursWebApplication.Business_Logic;
+using KursWebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,41 +11,39 @@ namespace KursWebApplication.Controllers
     //[Authorize]
     public class DriverValuesController : ApiController
     {
+        DriverLogic logic = new DriverLogic();
+
         // GET api/values
         public List<MyDBModels.Driver> Get()
         {
-            var db = new MyDBModels.DB();
-            return db.driver.ToList();
+            return logic.logicMethodForGetListData();
         }
 
         // GET api/values/
         public MyDBModels.Driver Get(int id)
         {
-            var db = new MyDBModels.DB();
-            return db.driver.Where(d => d.DriverId == id).FirstOrDefault();
+            if (id != 0)
+            {
+                return logic.logicMethodForGetData(id);
+            }
+            return null;
         }
 
         // POST api/values
-        public void Post(Models.DriverModel value)
+        public void Post(Models.DriverModel newDriver)
         {
-            var db = new MyDBModels.DB();
-            MyDBModels.Driver driver = new MyDBModels.Driver();
-            driver.Secondname = value.Secondname;
-            driver.Qualification = value.Qualification;
-            driver.Experience = value.Experience;
-            driver.Salary = value.Salary;
-            db.driver.Add(driver);
-            db.SaveChanges();
+            if (newDriver != null)
+            {
+                logic.logicMethodForPostData(newDriver);
+            }
         }
 
         // DELETE api/values/
         public void Delete(int id)
         {
-            var db = new MyDBModels.DB();
-            MyDBModels.Driver driver = db.driver.Where(d => d.DriverId == id).FirstOrDefault();
-            if (driver != null) {
-                db.driver.Remove(driver);
-                db.SaveChanges();
+            if (id != 0)
+            {
+                logic.logicMethodForDeleteDataint(id);
             }
         }
     }

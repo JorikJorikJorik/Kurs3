@@ -1,4 +1,5 @@
-﻿using KursWebApplication.Models;
+﻿using KursWebApplication.Business_Logic;
+using KursWebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,42 +11,39 @@ namespace KursWebApplication.Controllers
     //[Authorize]
     public class GasListController : ApiController
     {
+        GasLogic logic = new GasLogic();
+
         // GET api/values
         public List<MyDBModels.GasList> Get()
         {
-            var db = new MyDBModels.DB();
-            return db.gasList.ToList();
+            return logic.logicMethodForGetListData();
         }
 
         // GET api/values/
         public MyDBModels.GasList Get(int id)
         {
-            var db = new MyDBModels.DB();
-            return db.gasList.Where(gl => gl.GasListId == id).FirstOrDefault();
+            if (id != 0)
+            {
+                return logic.logicMethodForGetData(id);
+            }
+            return null;
         }
 
         // POST api/values
-        public void Post(Models.GasListModel value)
+        public void Post(Models.GasListModel newGas)
         {
-            var db = new MyDBModels.DB();
-            MyDBModels.GasList gasList = new MyDBModels.GasList();
-            gasList.BusId = value. BusId;
-            gasList.CostGas = value.CostGas;
-            gasList.CountLitre = value.CountLitre;
-            gasList.TimeGet = value.TimeGet;
-            db.gasList.Add(gasList);
-            db.SaveChanges();
+            if (newGas != null)
+            {
+                logic.logicMethodForPostData(newGas);
+            }
         }
 
         // DELETE api/values/
         public void Delete(int id)
         {
-            var db = new MyDBModels.DB();
-            MyDBModels.GasList gasList = db.gasList.Where(gl => gl.GasListId == id).FirstOrDefault();
-            if (gasList != null)
+            if (id != 0)
             {
-                db.gasList.Remove(gasList);
-                db.SaveChanges();
+                logic.logicMethodForDeleteDataint(id);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using KursWebApplication.Models;
+﻿using KursWebApplication.Business_Logic;
+using KursWebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,41 +14,39 @@ namespace KursWebApplication.Controllers
     //[Authorize]
     public class RepairListController : ApiController
     {
+        RepairLogic logic = new RepairLogic();
+
         // GET api/values
         public List<MyDBModels.RepairList> Get()
         {
-            var db = new MyDBModels.DB();
-            return db.repairList.ToList();
+            return logic.logicMethodForGetListData();
         }
 
         // GET api/values/
         public MyDBModels.RepairList Get(int id)
         {
-            var db = new MyDBModels.DB();
-            return db.repairList.Where(rl => rl.ListServiceId == id).FirstOrDefault();
+            if (id != 0)
+            {
+                return logic.logicMethodForGetData(id);
+            }
+            return null;
         }
 
         // POST api/values
-        public void Post(Models.RepairListModel value)
+        public void Post(Models.RepairListModel newRepair)
         {
-            var db = new MyDBModels.DB();
-            MyDBModels.RepairList repairList = new MyDBModels.RepairList();
-            repairList.BusId = value.BusId;
-            repairList.BusCondition = value.BusCondition;
-            repairList.TimeGet = value.TimeGet;
-            db.repairList.Add(repairList);
-            db.SaveChanges();
+            if (newRepair != null)
+            {
+                logic.logicMethodForPostData(newRepair);
+            }
         }
 
         // DELETE api/values/
         public void Delete(int id)
         {
-            var db = new MyDBModels.DB();
-            MyDBModels.RepairList repairList = db.repairList.Where(rl => rl.ListServiceId == id).FirstOrDefault();
-            if (repairList != null)
+            if (id != 0)
             {
-                db.repairList.Remove(repairList);
-                db.SaveChanges();
+                logic.logicMethodForDeleteDataint(id);
             }
         }
 

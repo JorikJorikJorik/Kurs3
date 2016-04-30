@@ -248,6 +248,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Business Logic\BusLogic.cs" />
+    <Compile Include="Business Logic\DateLogic.cs" />
+    <Compile Include="Business Logic\DriverLogic.cs" />
+    <Compile Include="Business Logic\GasLogic.cs" />
+    <Compile Include="Business Logic\RepairLogic.cs" />
+    <Compile Include="Business Logic\WorkLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BusValuesController.cs" />
     <Compile Include="Controllers\DateWorkListController.cs" />
@@ -257,6 +262,11 @@
     <Compile Include="Controllers\RepairListController.cs" />
     <Compile Include="Controllers\WorkListController.cs" />
     <Compile Include="Data Access\BusDataAccess.cs" />
+    <Compile Include="Data Access\DateDataAccess.cs" />
+    <Compile Include="Data Access\DriverDataAccess.cs" />
+    <Compile Include="Data Access\GasDataAccess.cs" />
+    <Compile Include="Data Access\RepairDataAccess.cs" />
+    <Compile Include="Data Access\WorkDataAccess.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -308,6 +318,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\k.pubxml" />
+    <None Include="Properties\PublishProfiles\Kurs.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
