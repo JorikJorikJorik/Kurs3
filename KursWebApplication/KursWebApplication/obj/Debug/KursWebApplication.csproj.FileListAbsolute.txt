@@ -197,6 +197,6 @@ C:\Users\jorik\Source\Repos\Kurs3\KursWebApplication\KursWebApplication\bin\fi\N
 C:\Users\jorik\Source\Repos\Kurs3\KursWebApplication\KursWebApplication\bin\fr\Npgsql.resources.dll
 C:\Users\jorik\Source\Repos\Kurs3\KursWebApplication\KursWebApplication\bin\ja\Npgsql.resources.dll
 C:\Users\jorik\Source\Repos\Kurs3\KursWebApplication\KursWebApplication\bin\zh-CN\Npgsql.resources.dll
-C:\Users\jorik\Source\Repos\Kurs3\KursWebApplication\KursWebApplication\obj\Debug\KursWebApplication.csprojResolveAssemblyReference.cache
 C:\Users\jorik\Source\Repos\Kurs3\KursWebApplication\KursWebApplication\obj\Debug\KursWebApplication.dll
 C:\Users\jorik\Source\Repos\Kurs3\KursWebApplication\KursWebApplication\obj\Debug\KursWebApplication.pdb
+C:\Users\jorik\Source\Repos\Kurs3\KursWebApplication\KursWebApplication\obj\Debug\KursWebApplication.csprojResolveAssemblyReference.cache

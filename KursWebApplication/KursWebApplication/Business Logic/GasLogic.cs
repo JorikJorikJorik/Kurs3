@@ -11,6 +11,18 @@ namespace KursWebApplication.Business_Logic
     {
         GasDataAccess dataAccess = new GasDataAccess();
 
+        public List<FullGasList> logicMethodForFullGetListData()
+        {
+            List<FullGasList> listData = dataAccess.getFullListData();
+            return listData;
+        }
+
+        public List<FullGasList> logicMethodForFullGetListDataByUser(int number)
+        {
+            List<FullGasList> listData = dataAccess.getFullListDataByUser(number);
+            return listData;
+        }
+
         public List<MyDBModels.GasList> logicMethodForGetListData()
         {
             List<MyDBModels.GasList> listData = dataAccess.getListData();
@@ -23,9 +35,9 @@ namespace KursWebApplication.Business_Logic
             return data;
         }
 
-        public void logicMethodForPostData(Models.GasListModel data)
+        public void logicMethodForPostData(Models.GasListModel data, int number)
         {
-            dataAccess.postGas(data);
+            dataAccess.postGas(data, number);
         }
 
         public void logicMethodForDeleteDataint(int id)

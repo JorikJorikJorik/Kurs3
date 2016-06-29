@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Http;
 using KursWebApplication.Models;
 using KursWebApplication.Business_Logic;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace KursWebApplication.Controllers
 {
@@ -14,7 +17,7 @@ namespace KursWebApplication.Controllers
         WorkLogic logic = new WorkLogic();
 
         // GET api/values
-        public List<MyDBModels.WorkList> Get()
+        public List<FullWorkList> Get()
         {
             return logic.logicMethodForGetListData();
         }
@@ -30,21 +33,36 @@ namespace KursWebApplication.Controllers
         }
 
         // POST api/values
-        public void Post(Models.WorkListModel newWork)
+        public int Post(Models.WorkListModel newWork)
         {
             if (newWork != null)
             {
                 logic.logicMethodForPostData(newWork);
-            }
-        }
+                
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK);
+                    response.Headers.CacheControl = new CacheControlHeaderValue()
+                    {
+                        MaxAge = TimeSpan.FromMinutes(20)
+                    };
+                    return (int)response.StatusCode;
+                }
+            return (int)Request.CreateResponse(HttpStatusCode.BadRequest).StatusCode;
+         }
 
         // DELETE api/values/
-        public void Delete(int id)
+        public int Delete(int id)
         {
-            if (id != 0)
+            if (id > 0)
             {
                 logic.logicMethodForDeleteDataint(id);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK);
+                response.Headers.CacheControl = new CacheControlHeaderValue()
+                {
+                    MaxAge = TimeSpan.FromMinutes(20)
+                };
+                return (int)response.StatusCode;
             }
+            return (int)Request.CreateResponse(HttpStatusCode.BadRequest).StatusCode;
         }
     }
 }

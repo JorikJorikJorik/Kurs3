@@ -19,22 +19,26 @@ namespace KursWebApplication.Models
             public DbSet<DateWorkList> dateWorkList { get; set; }
             public DbSet<RepairList> repairList { get; set; }
             public DbSet<GasList> gasList { get; set; }
+            public DbSet<Account> account { get; set; }
         }
 
         [Table("driver", Schema = "public")]
         public class Driver
         {
-            [Key]
+            [Key] 
             [Column("driver_id")]
             public int DriverId { get; set; }
+            [Column("driver_number")]
+            public int DriverNumber { get; set; }
             [Column("secondname")]
             public string Secondname { get; set; }
-            [Column("qualification")]
-            public string Qualification { get; set; }
             [Column("experience")]
             public int Experience { get; set; }
             [Column("salary")]
             public int Salary { get; set; }
+            [Column("qualification")]
+            public string Qualification { get; set; }
+          
            
 
         }
@@ -53,6 +57,7 @@ namespace KursWebApplication.Models
             [Column("bus_condition")]
             public string BusCondition { get; set; }
 
+
         }
 
         [Table("work_list", Schema = "public")]
@@ -60,15 +65,15 @@ namespace KursWebApplication.Models
         {
             [Key]
             [Column("work_list_id")]
-            public int WorkListID { get; set; }
+            public int WorkListId { get; set; }
             [Column("driver_id")]
             public int DriverId { get; set; }
             [Column("bus_id")]
             public int BusId { get; set; }
             [Column("second_name_dispatcher")]
             public string SecondNameDispatcher { get; set; }
-            [Column("state_health")]
-            public bool StateHealth { get; set; }
+            [Column("date_action")]
+            public DateTime DateAction { get; set; }
 
         }
 
@@ -91,7 +96,7 @@ namespace KursWebApplication.Models
         {
             [Key]
             [Column("list_service_id")]
-            public int ListServiceId { get; set; }
+            public int ServiceListId { get; set; }
             [Column("bus_id")]
             public int BusId { get; set; }
             [Column("time_get")]
@@ -119,7 +124,20 @@ namespace KursWebApplication.Models
             [Column("time_get")]
             public DateTime TimeGet { get; set; }
 
+        }
 
+        [Table("login", Schema = "public")]
+        public class Account
+        {
+            [Key]
+            [Column("login_id")]
+            public string LoginId { get; set; }
+            [Column("password_worker")]
+            public string PasswordWorker { get; set; }
+            [Column("role_worker")]
+            public string RoleWorker { get; set; }
+            [Column("number_worker")]
+            public string NumberWorker { get; set; }
         }
 
     }

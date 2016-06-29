@@ -11,16 +11,16 @@ namespace KursWebApplication.Controllers
    // [Authorize]
     public class DateWorkListController : ApiController
     {
-        WorkLogic logic = new WorkLogic();
+        DateLogic logic = new DateLogic();
 
         // GET api/values
-        public List<MyDBModels.WorkList> Get()
+        public List<MyDBModels.DateWorkList> Get()
         {
             return logic.logicMethodForGetListData();
         }
 
         // GET api/values/
-        public MyDBModels.WorkList Get(int id)
+        public MyDBModels.DateWorkList Get(int id)
         {
             if (id != 0)
             {
@@ -30,7 +30,7 @@ namespace KursWebApplication.Controllers
         }
 
         // POST api/values
-        public void Post(Models.WorkListModel newWork)
+        public void Post(Models.DateWorkListModel newWork)
         {
             if (newWork != null)
             {
@@ -47,16 +47,25 @@ namespace KursWebApplication.Controllers
             }
         }
 
+        public MyDBModels.WorkList Get(DateTime dateAction)
+        {
+            if (dateAction != null)
+            {
+                return logic.logicMethodForGetWorkListByDate(dateAction);
+            }
+            return null;
+        }
 
-      //  public MyDBModels.WorkList GetWorkListByData(DateTime dateAction) {
+
+        //  public MyDBModels.WorkList GetWorkListByData(DateTime dateAction) {
         //    var db = new MyDBModels.DB();
-          //  DateTime dateTime1 = dateAction.Date;
-          //  DateTime dateTime2 = dateAction.AddDays(1).Date;
-          //  int workId = db.dateWorkList.Where(date => date.DateAction < dateTime2 && date.DateAction >= dateTime1).Select(x => x.WorkListId).FirstOrDefault();
-          //  return db.workList.Where(dwl => dwl.WorkListID == workId).FirstOrDefault();
+        //  DateTime dateTime1 = dateAction.Date;
+        //  DateTime dateTime2 = dateAction.AddDays(1).Date;
+        //  int workId = db.dateWorkList.Where(date => date.DateAction < dateTime2 && date.DateAction >= dateTime1).Select(x => x.WorkListId).FirstOrDefault();
+        //  return db.workList.Where(dwl => dwl.WorkListID == workId).FirstOrDefault();
 
-           // return db.workList.Join(db.dateWorkList, workId => workId.WorkListID, dateId => dateId.WorkListId, (workId, dateId) => new { DateId = dateId, WorkId = workId }).Where(dw => dw.WorkId.WorkListID == dw.DateId.WorkListId && dw.DateId.DateAction.Date == dateAction).FirstOrDefault();
-      //  }
+        // return db.workList.Join(db.dateWorkList, workId => workId.WorkListID, dateId => dateId.WorkListId, (workId, dateId) => new { DateId = dateId, WorkId = workId }).Where(dw => dw.WorkId.WorkListID == dw.DateId.WorkListId && dw.DateId.DateAction.Date == dateAction).FirstOrDefault();
+        //  }
 
     }
 }

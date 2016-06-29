@@ -11,9 +11,9 @@ namespace KursWebApplication.Business_Logic
     {
         WorkDataAccess dataAccess = new WorkDataAccess();
 
-        public List<MyDBModels.WorkList> logicMethodForGetListData()
+        public List<FullWorkList> logicMethodForGetListData()
         {
-            List<MyDBModels.WorkList> listData = dataAccess.getListData();
+            List<FullWorkList> listData = dataAccess.getListData();
             return listData;
         }
 

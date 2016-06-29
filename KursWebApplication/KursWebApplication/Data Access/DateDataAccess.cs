@@ -44,13 +44,13 @@ namespace KursWebApplication.Data_Access
             }
         }
 
-        public MyDBModels.WorkList GetWorkListByData(DateTime dateAction)
+        public MyDBModels.WorkList getWorkListByDate(DateTime dateAction)
         {
             var db = new MyDBModels.DB();
             DateTime dateTime1 = dateAction.Date;
             DateTime dateTime2 = dateAction.AddDays(1).Date;
             int workId = db.dateWorkList.Where(date => date.DateAction < dateTime2 && date.DateAction >= dateTime1).Select(x => x.WorkListId).FirstOrDefault();
-            return db.workList.Where(dwl => dwl.WorkListID == workId).FirstOrDefault();
+            return db.workList.Where(dwl => dwl.WorkListId == workId).FirstOrDefault();
 
         }
     }

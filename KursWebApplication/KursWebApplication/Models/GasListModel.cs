@@ -10,7 +10,7 @@ namespace KursWebApplication.Models
         public int GasListId { get; set; }
         public int BusId { get; set; }
         public int CountLitre { get; set; }
-        public string TypeGas { get; set; }// string mas[]
+        public string TypeGas { get; set; }
         public int CostGas { get; set; }
         public DateTime TimeGet { get; set; }
     }

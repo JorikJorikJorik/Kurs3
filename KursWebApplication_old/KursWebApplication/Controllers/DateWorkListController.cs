@@ -47,16 +47,5 @@ namespace KursWebApplication.Controllers
             }
         }
 
-        public MyDBModels.WorkList GetByData(DateTime dateAction) {
-            var db = new MyDBModels.DB();
-            DateTime dateTime1 = dateAction.Date;
-            DateTime dateTime2 = dateAction.AddDays(1).Date;
-            int workId = db.dateWorkList.Where(date => date.DateAction < dateTime2 && date.DateAction >= dateTime1).Select(x => x.WorkListId).FirstOrDefault();
-            return db.workList.Where(dwl => dwl.WorkListID == workId).FirstOrDefault();
-
-
-           // return db.workList.Join(db.dateWorkList, workId => workId.WorkListID, dateId => dateId.WorkListId, (workId, dateId) => new { DateId = dateId, WorkId = workId }).Where(dw => dw.WorkId.WorkListID == dw.DateId.WorkListId && dw.DateId.DateAction.Date == dateAction).FirstOrDefault();
-        }
-
     }
 }

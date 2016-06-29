@@ -14,12 +14,14 @@ namespace KursWebApplication.Controllers
         DriverLogic logic = new DriverLogic();
 
         // GET api/values
+        [HttpGet]
         public List<MyDBModels.Driver> Get()
         {
             return logic.logicMethodForGetListData();
         }
 
         // GET api/values/
+        [HttpGet]
         public MyDBModels.Driver Get(int id)
         {
             if (id != 0)
@@ -30,6 +32,7 @@ namespace KursWebApplication.Controllers
         }
 
         // POST api/values
+        [HttpPost]
         public void Post(Models.DriverModel newDriver)
         {
             if (newDriver != null)
@@ -39,6 +42,7 @@ namespace KursWebApplication.Controllers
         }
 
         // DELETE api/values/
+        [HttpDelete]
         public void Delete(int id)
         {
             if (id != 0)

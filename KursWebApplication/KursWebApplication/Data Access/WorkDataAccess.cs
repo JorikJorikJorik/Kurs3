@@ -8,17 +8,58 @@ namespace KursWebApplication.Data_Access
 {
     public class WorkDataAccess
     {
-        public List<MyDBModels.WorkList> getListData()
+        public List<FullWorkList> getListData()
         {
             var db = new MyDBModels.DB();
-            List<MyDBModels.WorkList> listData = db.workList.ToList();
-            return listData;
+
+            List<FullWorkList> fullList = db.workList.Join(db.bus, w => w.BusId, b => b.BusId, (w, b) => new
+            {
+                WorkList = new WorkListModel {
+                    WorkListId = w.WorkListId,
+                    BusId = w.BusId,
+                    DriverId = w.DriverId,
+                    SecondNameDispatcher = w.SecondNameDispatcher,
+                    DateAction = w.DateAction
+                },
+
+                Bus = new BusModel
+                {
+                    BusNumber = b.BusNumber,
+                    Model = b.Model,
+                    BusCondition = b.BusCondition
+                },
+               
+            }).Join(db.driver,comb => comb.WorkList.DriverId, d => d.DriverId, (comb, d) => new FullWorkList {
+                WorkList = new WorkListModel
+                {
+                    WorkListId = comb.WorkList.WorkListId,
+                    BusId = comb.WorkList.BusId,
+                    DriverId = comb.WorkList.DriverId,
+                    SecondNameDispatcher = comb.WorkList.SecondNameDispatcher,
+                    DateAction = comb.WorkList.DateAction
+                },
+                Bus = new BusModel
+                {
+                    BusNumber = comb.Bus.BusNumber,
+                    Model = comb.Bus.Model,
+                    BusCondition = comb.Bus.BusCondition
+                },
+                Driver = new DriverModel
+                {
+                    DriverNumber = d.DriverNumber,
+                    Experience = d.Experience,
+                    Qualification = d.Qualification,
+                    Secondname = d.Secondname
+                },
+            }). ToList();
+            
+            return fullList;
         }
 
         public MyDBModels.WorkList getDataById(int id)
         {
             var db = new MyDBModels.DB();
-            MyDBModels.WorkList workModel = db.workList.Where(b => b.WorkListID == id).FirstOrDefault();
+            MyDBModels.WorkList workModel = db.workList.Where(b => b.WorkListId == id).FirstOrDefault();
             return workModel;
         }
 
@@ -29,7 +70,7 @@ namespace KursWebApplication.Data_Access
             workList.DriverId = value.DriverId;
             workList.BusId = value.BusId;
             workList.SecondNameDispatcher = value.SecondNameDispatcher;
-            workList.StateHealth = value.StateHealth;
+            workList.DateAction = value.DateAction;
             db.workList.Add(workList);
             db.SaveChanges();
         }
@@ -38,7 +79,7 @@ namespace KursWebApplication.Data_Access
         public void deleteWork(int id)
         {
             var db = new MyDBModels.DB();
-            MyDBModels.WorkList workList = db.workList.Where(wl => wl.WorkListID == id).FirstOrDefault();
+            MyDBModels.WorkList workList = db.workList.Where(wl => wl.WorkListId == id).FirstOrDefault();
             if (workList != null)
             {
                 db.workList.Remove(workList);

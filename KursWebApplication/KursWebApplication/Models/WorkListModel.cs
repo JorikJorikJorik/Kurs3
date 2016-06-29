@@ -11,6 +11,6 @@ namespace KursWebApplication.Models
         public int DriverId { get; set; }
         public int BusId { get; set; }
         public string SecondNameDispatcher { get; set; }
-        public bool StateHealth { get; set; }
+        public DateTime DateAction { get; set; }
     }
 }

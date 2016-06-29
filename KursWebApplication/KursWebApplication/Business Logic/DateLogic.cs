@@ -32,5 +32,13 @@ namespace KursWebApplication.Business_Logic
         {
             dataAccess.deleteDate(id);
         }
+
+        public MyDBModels.WorkList logicMethodForGetWorkListByDate(DateTime dateAction)
+        {
+            MyDBModels.WorkList data = dataAccess.getWorkListByDate(dateAction);
+            return data;
+        }
+
+        
     }
 }

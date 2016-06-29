@@ -11,6 +11,19 @@ namespace KursWebApplication.Business_Logic
     {
         RepairDataAccess dataAccess = new RepairDataAccess();
 
+    
+        public List<FullRepairList> logicMethodForGetFullListData()
+        {
+            List<FullRepairList> listData = dataAccess.getFullListData();
+            return listData;
+        }
+
+        public List<FullRepairList> logicMethodForGetFullData(int number)
+        {
+            List<FullRepairList> data = dataAccess.getFullListDataByUser(number);
+            return data;
+        }
+
         public List<MyDBModels.RepairList> logicMethodForGetListData()
         {
             List<MyDBModels.RepairList> listData = dataAccess.getListData();
@@ -23,9 +36,9 @@ namespace KursWebApplication.Business_Logic
             return data;
         }
 
-        public void logicMethodForPostData(Models.RepairListModel data)
+        public void logicMethodForPostData(Models.RepairListModel data, int number)
         {
-            dataAccess.postRepair(data);
+            dataAccess.postRepair(data, number);
         }
 
         public void logicMethodForDeleteDataint(int id)

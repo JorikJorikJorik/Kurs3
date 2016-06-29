@@ -33,5 +33,15 @@ namespace KursWebApplication.Business_logic
             dataAccess.deleteBus(id);
         }
 
+        public List<FullRepairList> logicMethodForGetRepairListById(int id)
+        {
+           return dataAccess.getRepairListData(id);
+        }
+
+        public List<FullGasList> logicMethodForGetGasListById(int id)
+        {
+            return dataAccess.getGasListData(id);
+        }
+
     }
 }
